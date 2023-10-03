@@ -41,4 +41,4 @@ The OSU Micro-Benchmarks suite holds multiple benchmarks that measure low-level 
     - different nodes.
 - Amend your table and figures to include these additional measurements. What effects can you observe? How can you verify rank placement without looking at performance?
 - How stable are the measurements when running the experiments multiple times?
-- Insert the measured time for latency (size 0) and bandwidth (size 1048576) into the comparison spreadsheet: https://docs.google.com/spreadsheets/d/1E-9kRGMV8Py1Qp32wuVHs7dWSXIWigBHc3Ba1iTheFc/edit?usp=sharing
+- Insert the measured time for latency (size 0) and bandwidth (size 1048576) into the comparison spreadsheet: https://docs.google.com/spreadsheets/d/18WIigEWPM3htroCkLbLoiVKf2x4J2PtxDbtuYUPTRQQ/edit
