@@ -17,3 +17,13 @@
 - How stable are the measurements when running the experiments multiple times?
 
 - Insert the measured time for latency (size 0) and bandwidth (size 1048576) into the comparison spreadsheet: https://docs.google.com/spreadsheets/d/1E-9kRGMV8Py1Qp32wuVHs7dWSXIWigBHc3Ba1iTheFc/edit?usp=sharing
+
+
+
+
+
+```
+module load gcc/12.2.0-gcc-8.5.0-p4pe45v
+
+./configure CC=mpicc CXX=mpic++ ...
+```
