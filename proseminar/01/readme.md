@@ -13,7 +13,7 @@ You received user credentials for the LCC3 cluster. If you did not change the de
 You can find information about LCC3 at https://www.uibk.ac.at/zid/systeme/hpc-systeme/leo3/ and information about SLURM job submission at https://www.uibk.ac.at/zid/systeme/hpc-systeme/common/tutorials/slurm-tutorial.html.
 
 **Please run any benchmarks or heavy CPU loads only on the compute nodes, not on the login node.**
-If you want to do some interactive experimentation, use an *interactive job* as outlined in the tutorial. Make sure to stop any interactive jobs once you are done.
+If you want to do some interactive experimentation, use an _interactive job_ as outlined in the tutorial. Make sure to stop any interactive jobs once you are done.
 
 ### Tasks
 
@@ -22,13 +22,13 @@ If you want to do some interactive experimentation, use an *interactive job* as 
 - In your opionion, what are the 5 most important parameters available when submitting a job and why? What are possible settings of these parameters, and what effect do they have?
 - How do you run your program in parallel? What environment setup is required?
 
-## Exercise 2  (2 Points)
+## Exercise 2 (2 Points)
 
 This exercise consists in running an MPI microbenchmark in order to examine the impact of HPC topologies on performance.
 
 ### Description
 
-The OSU Micro-Benchmarks suite holds multiple benchmarks that measure low-level performance properties such as latency and bandwidth between MPI ranks (=processes). Specifically, for this exercise, we are interested in the *point-to-point* ones, which exchange messages between 2 MPI ranks.
+The OSU Micro-Benchmarks suite holds multiple benchmarks that measure low-level performance properties such as latency and bandwidth between MPI ranks (=processes). Specifically, for this exercise, we are interested in the _point-to-point_ ones, which exchange messages between 2 MPI ranks.
 
 ### Tasks
 
@@ -36,9 +36,9 @@ The OSU Micro-Benchmarks suite holds multiple benchmarks that measure low-level 
 - After building, submit SLURM jobs that run the `osu_latency` and `osu_bw` executables.
 - Create a table and figures that illustrate the measured data and study them. What effects can you observe?
 - Find out more about the hardware that you're running on, e.g. by using `lstopo --of txt` (available via `module load hwloc`). Modify your experiment such that the 2 MPI ranks are placed on
-    - different cores of the same socket,
-    - different sockets of the same node, and
-    - different nodes.
+  - different cores of the same socket,
+  - different sockets of the same node, and
+  - different nodes.
 - Amend your table and figures to include these additional measurements. What effects can you observe? How can you verify rank placement without looking at performance?
 - How stable are the measurements when running the experiments multiple times?
 - Insert the measured time for latency (size 0) and bandwidth (size 1048576) into the comparison spreadsheet: https://docs.google.com/spreadsheets/d/1E-9kRGMV8Py1Qp32wuVHs7dWSXIWigBHc3Ba1iTheFc/edit?usp=sharing
