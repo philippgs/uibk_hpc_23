@@ -13,4 +13,6 @@
 # Enforce exclusive node allocation, do not share with other jobs
 #SBATCH --exclusive
 
-/bin/hostname
+module load openmpi/3.1.6-gcc-12.2.0-d2gmn55
+
+mpiexec /home/cb76/cb761030/uibk_hpc_23/proseminar/01/osu-micro-benchmarks-5.8/mpi/pt2pt/osu_latency
