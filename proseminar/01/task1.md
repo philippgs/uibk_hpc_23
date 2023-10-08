@@ -2,48 +2,48 @@
 
 ## SLURM
 
-- scheduling a job: `sbatch`
+- scheduling a job: `sbatch [scriptname]`
 - monitor a job: `squeue` or `sq`
 - cancel a job: `scancel <job-id>`
 
 ## Job Script
 
-`./job.sh`
+script provided in `job1.sh`
 
 ## Options
 
-Options are passed as `sbatch --<option>`
+1. **`--ntasks`**: This is the number of tasks to run for the job and directly correlates with how many cores will be used. 
+2. **`--cpus-per-task`**: Specifies the number of CPUs allocated per task. This is useful for multi-threaded applications and can improve CPU utilization, thus potentially improving performance.
+3. **`--ntasks-per-node`**: Controls the number of tasks that can be run per node. For some parallel jobs, performance can be optimized by controlling how tasks are distributed across nodes.
+4. **`--mem`**: Allocates a specific amount of memory for the job. If the job is memory-intensive, ensuring that it has enough memory can significantly affect performance. Running out would mean swapping to disk, which is much slower.
+5. **`--exclusive`**: Requests exclusive use of a node, preventing other jobs from running on the same node. This ensures that no other jobs will contend for the resources on the node your job is running on, which can result in more consistent and potentially better performance.
 
-- `output=<filename_pattern>`
-  - filename of the output file
-  - there exists some patterns, for dynamic output names
-- `input=<filename>`
-  - to define an input file
-  - maybe useful to pipe jobs together
-  - pattern are allowed
-- `chdir=<directory`>
-  - to define the current working directory for relative input and output files
-- `test-only`
-  - validates the job script and estimates execution start
-- `ntasks=<number>`
-  - requests CPU resources for the number of tasks
-    - default 'filled up' behavior
-      - to avoid that use `exclusive` Options
-- `ntasks-per-node=<number>`
-  - can be a range or a single number
-  - restricts the scheduling algorithm
+#### Possible settings and effects:
+
+- `--ntasks`: An integer specifying the number of tasks, determining how many cores are used for the job.
+  
+- `--cpus-per-task`: An integer specifying the number of CPUs per task.
+  
+- `--ntasks-per-node`: An integer that limits the number of tasks per node, useful for optimizing data locality in some parallel algorithms.
+  
+- `--mem`: Specifies memory in megabytes or can be suffixed with `G` for gigabytes, e.g., `--mem=20G`.
+  
+- `--exclusive`: No argument needed. Ensures that the node is exclusively used for this job, eliminating resource contention.
 
 ## Parallel Jobs
 
-Slurm executes parallel jobs in a master/slave setup. The master is started, when the scheduler starts the job and then the master distributes the work across the worker. The worker then executed the job, which is in Slurm a `job step`. A job can contain multiple job steps.
+Running the program in parallel depends on how the program is written. For example, in our case if it is written using MPI, we can use mpirun in the SLURM script to start the parallel execution.
 
-To start a job step, use `srun`.
+```
+#!/bin/bash
+#SBATCH --ntasks=4
+mpiexec -n $SLURM_NTASKS program
+```
 
-There are some additional options, which are relevant for the parallel job execution:
+For environment setup, we need to load appropriate modules or set environment variables, depending on the software stack required for our parallel program.
 
-- `export=<ALL | NONE>`
-  - controls the behavior of environment variables
-- `cpus-per-task=<number>`
-  - fine-tuning the CPU provision
-- `mpi`
-  - ensuring ranks and communication
+In our case we need to load the `openmpi` module in the `job.sh` script before we run it using `mpiexec` in order to run the our program using MPI.
+
+```
+module load openmpi/3.1.6-gcc-12.2.0-d2gmn55
+```
