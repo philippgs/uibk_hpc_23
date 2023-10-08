@@ -1,3 +1,5 @@
+Team collaboration of Hendrik Munske and Florian Neururer
+
 # Exercise 2
 
 After running the different benchmarks using the script `job2.sh` the following data was observed:

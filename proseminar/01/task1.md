@@ -1,3 +1,4 @@
+Team collaboration of Hendrik Munske and Florian Neururer
 # Task 1
 
 ## SLURM
@@ -21,7 +22,7 @@ script provided in `job1.sh`
 #### Possible settings and effects:
 
 - `--ntasks`: An integer specifying the number of tasks, determining how many cores are used for the job.
-  
+
 - `--cpus-per-task`: An integer specifying the number of CPUs per task.
   
 - `--ntasks-per-node`: An integer that limits the number of tasks per node, useful for optimizing data locality in some parallel algorithms.
