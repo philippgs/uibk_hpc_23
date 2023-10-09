@@ -109,7 +109,14 @@ By running `lstopo` with the job script provided in `job3.sh` we receive the fol
 ### Cores and Threads
 
 - Each CPU package contains 6 cores.
-- Each core is capable of running 2 threads, indicated by the `PU` (Processing Unit) entries, which suggests that Hyper-Threading (or a similar technology) is enabled.
+- Each core is capable of running 2 threads, indicated by the `PU` (Processing Unit) entries, which suggests that Hyper-Threading (or a similar technology) is supported.
+
+To enable/disable Hyper-Threading use either of these commands in the SLURM script.
+
+```bash
+#SBATCH --hint=multithread
+#SBATCH --hint=nomultithread
+```
 
 ### Networking
 
