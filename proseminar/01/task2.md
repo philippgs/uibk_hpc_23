@@ -39,7 +39,7 @@ After running the different benchmarks using the script `job2.sh` the following 
 
 1. **Constant for small messages**: For message sizes from 0 to 16 bytes, the latency is almost constant (around 0.16-0.17 µs), which is an indicator of constant and low overhead for small messages.
 
-2. **Linear Increase**: Afterwards there is a noticeable increase in latency. This suggests that for larger data sizes, the cost of data transfer starts to come into play. If we look at the firgure this results in an almost linear increase depending on the message size.
+2. **Linear Increase**: Afterwards there is a noticeable increase in latency. This suggests that for larger data sizes, the cost of data transfer starts to come into play. If we look at the figure this results in an almost linear increase depending on the message size.
 
 3. **Significant Jumps**: There are large jumps in latency at 131072 bytes and especially at 2097152 and 4194304 bytes. This could indicate that the system has to manage additional complexity, possibly due to cache limits, memory paging, or network bottlenecks.
 
@@ -89,27 +89,34 @@ After running the different benchmarks using the script `job2.sh` the following 
 
 # Hardware Observations
 
-By running lstopo with the job script provided in `job3.sh` we receive the follwing image:
+By running `lstopo` with the job script provided in `job3.sh` we receive the following image:
 ![lstopo](charts/lstopo.png)
 
 ### Machine Details
 
-- The node has 47GB of total memory.
+- The node has 47 GB of total memory.
 
 ### CPU and NUMA
 
 - The machine contains two CPU packages (`Package L#0` and `Package L#1`), indicating a dual-socket configuration.
-- Each CPU package is associated with a NUMA node (`NUMANode L#0` with 23GB RAM and `NUMANode L#1` with 24GB RAM).
+- Each CPU package is associated with a NUMA node (`NUMANode L#0` with 23 GB RAM and `NUMANode L#1` with 24 GB RAM).
 
 ### Cache
 
-- Each CPU package has its own L3 cache of 12MB.
-- Each core within a CPU package has individual L2, L1d (L1 data), and L1i (L1 instruction) caches. Specifically, each core has 256KB of L2 cache and 32KB each of L1d and L1i caches.
+- Each CPU package has its own L3 cache of 12 MB.
+- Each core within a CPU package has individual L2, L1d (L1 data), and L1i (L1 instruction) caches. Specifically, each core has 256 KB of L2 cache and 32 KB each of L1d and L1i caches.
 
 ### Cores and Threads
 
 - Each CPU package contains 6 cores.
-- Each core is capable of running 2 threads, indicated by the `PU` (Processing Unit) entries, which suggests that Hyper-Threading (or a similar technology) is enabled.
+- Each core is capable of running 2 threads, indicated by the `PU` (Processing Unit) entries, which suggests that Hyper-Threading (or a similar technology) is supported.
+
+To enable/disable Hyper-Threading use either of these commands in the SLURM script.
+
+```bash
+#SBATCH --hint=multithread
+#SBATCH --hint=nomultithread
+```
 
 ### Networking
 
@@ -245,10 +252,10 @@ mpiexec ~/osu-micro-benchmarks-5.8/mpi/pt2pt/osu_bw
 
 ### Observations
 
-In general we can observe that the original and Same Socket configuration are basically equal, indicating that in the original configuration is equivalent to the same socket version.
+In general, we can observe that the original and Same Socket configuration are basically equal, indicating that in the original configuration is equivalent to the same socket version.
 
 1. **Same Socket**: This represents the best latency and bandwidth as ranks in the same socket can share cache, leading to faster data exchange.
-2. **Different Socket, Same Node**: There is possibly a very slight increase in latency and decrease in bandwidth noticable due to data having to travel through the socket interconnect. This is very minimal and barely noticable.
+2. **Different Socket, Same Node**: There is possibly a very slight increase in latency and decrease in bandwidth noticeable due to data having to travel through the socket interconnect. This is very minimal and barely noticeable.
 3. **Different Nodes**: This results in higher latency and lower bandwidth as the data now has to travel over the network which is visible in the lower performance.
 
 ### Verifying Rank Placement
@@ -261,7 +268,7 @@ There are multiple ways to verify rank placement without performance indicators:
 ## Measurement Stability
 
 It seems that the measurements are very stable when running the original experiments multiple times. The values are quite consistent across different runs, indicating a well-controlled test environment and reliable benchmarking tools.
-The only thing that is noticable that when looking at bandwidth at very lage message sizes a larger distribution can be seen.
+The only thing that is noticeable that when looking at bandwidth at very large message sizes a larger distribution can be seen.
 To further illustrate this point, in the following two graphs the measurements are shown across multiple runs.
 
 ![OSU Latency](charts/osu_latency2.png)
