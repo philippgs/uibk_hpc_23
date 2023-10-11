@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
 	if(myRank == 0) {
 
 		endtime = MPI_Wtime();
-    printf("Wall: %f seconds\n", endtime - starttime);
+		printf("Wall: %f seconds\n", endtime - starttime);
 		printf("Pi approximately: %f\n", 4.0 * (double)total_inside / (double)N);
 	}
 
