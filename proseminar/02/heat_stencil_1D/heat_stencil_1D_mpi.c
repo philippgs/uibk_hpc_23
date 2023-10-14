@@ -67,11 +67,9 @@ int main(int argc, char** argv) {
 		source_x = -1;
 	}
 
-	if(myRank == 0) {
 		printf("Initial:\t");
-		printTemperature(A, N);
+		printTemperature(&A[1], rankLength);
 		printf("\n");
-	}
 
 	// ---------- compute ----------
 
@@ -112,14 +110,14 @@ int main(int argc, char** argv) {
 		}
 
 		// show intermediate step
-		if(!(t % 10000) && myRank == 0) {
+		if(!(t % 10000)) {
 			printf("Step t=%d:\t", t);
 			printTemperature(&A[1], rankLength);
 			printf("\n");
 		}
 
 		if(myRank > 0) {
-			if(t > 1) {
+			if(t > 0) {
 				MPI_Wait(&(request[1]), MPI_STATUS_IGNORE);
 			}
 
@@ -129,7 +127,7 @@ int main(int argc, char** argv) {
 		}
 
 		if(myRank < numProcs - 1) {
-			if(t > 1) {
+			if(t > 0) {
 				MPI_Wait(&(request[3]), MPI_STATUS_IGNORE);
 			}
 
