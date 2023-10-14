@@ -1,4 +1,3 @@
-#include "splitmix64.c"
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -101,8 +100,7 @@ int main(int argc, char* argv[]) {
 	}
 	uint64_t N = strtoul(argv[1], NULL, 10);
 
-	splitMixState = time(NULL);
-	unsigned long long init[4] = { nextSplitMix(),nextSplitMix(),nextSplitMix(),nextSplitMix(), }, length = 4;
+	unsigned long long init[4] = { 0x12345ULL, 0x23456ULL, 0x34567ULL, 0x45678ULL }, length = 4;
 	init_by_array64(init, length);
 
 	uint64_t inside = 0;

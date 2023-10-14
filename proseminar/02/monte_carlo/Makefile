@@ -1,6 +1,6 @@
 CC=gcc
 MPICC=mpicc
-CC_FLAGS=-O2 -std=gnu11 -Wall
+CC_FLAGS=-O3 -std=gnu11 -Wall
 
 .PHONY: all
 all: pi_seq pi_mpi
