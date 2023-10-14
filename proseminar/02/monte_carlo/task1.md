@@ -30,7 +30,7 @@ In this task we chose to use **Collective Communication** becasue it seems more 
 | $10^{10}$ | 0.866    | 3.141575 |
 | $10^{11}$ | 7.976    | 3.141598 |
 | $10^{12}$ | 79.379   | 3.141594 |
-| $10^{13}$ | 791.921  | 4.141593 |
+| $10^{13}$ | 791.921  | 3.141593 |
 
 ## Obeservations and Implications
 
