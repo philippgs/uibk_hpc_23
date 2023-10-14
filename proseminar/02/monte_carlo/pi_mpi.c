@@ -39,12 +39,14 @@ int main(int argc, char* argv[]) {
 	s[3] = timeSeed << 32;
 
 	uint64_t upper_bound = UINT64_MAX >> 2;
+	uint64_t maks = UINT32_MAX >> 1;
 
-	for(long unsigned int i = 0; i < N / numProcs; ++i) {
-		uint64_t x = next() >> 33;
-		uint64_t y = next() >> 33;
+	for(uint64_t i = 0; i < N / numProcs; i++) {
+		uint64_t r = next();
+		uint64_t x = r >> 33;
+		uint64_t y = r & maks;
 		if(x * x + y * y <= upper_bound) {
-			++inside;
+			inside++;
 		}
 	}
 	uint64_t total_inside;
