@@ -39,14 +39,16 @@ int main(int argc, char** argv) {
 		MPI_Finalize();
 		return EXIT_FAILURE;
 	}
+
 	int T = N * 500;
 	printf("Computing heat-distribution for room size N=%d for T=%d timesteps\n", N, T);
 
-	double starttime, endtime;
-	starttime = MPI_Wtime();
 	// ---------- setup ----------
 	int rankLength = N / numProcs;
 	int bufferLength = rankLength + 2;
+	MPI_Request request[4];
+	double starttime, endtime;
+	starttime = MPI_Wtime();
 
 	// create a buffer for storing temperature fields
 	Vector A = createVector(bufferLength);
@@ -58,10 +60,14 @@ int main(int argc, char** argv) {
 
 	// and there is a heat source in one corner
 	int source_x = N / 4;
-	if(source_x >= myRank * rankLength && source_x < (myRank + 1) * rankLength) {
-		A[(source_x % rankLength) + 1] = 273 + 60;
+	if(source_x >= myRank * rankLength - 1 && source_x < (myRank + 1) * rankLength + 1) {
+		source_x = source_x - myRank * rankLength + 1;
+		A[source_x] = 273 + 60;
+	} else {
+		source_x = -1;
 	}
-	if(0) {
+
+	if(myRank == 0) {
 		printf("Initial:\t");
 		printTemperature(A, N);
 		printf("\n");
@@ -77,19 +83,19 @@ int main(int argc, char** argv) {
 		// .. we propagate the temperature
 
 		// has left neighbor
-		if(myRank != 0) {
-			MPI_Sendrecv(&A[1], 1, MPI_DOUBLE, myRank - 1, 0, &A[0], 1, MPI_DOUBLE, myRank - 1, 0,
-			             MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		if(myRank > 0) {
+			MPI_Irecv(&A[0], 1, MPI_DOUBLE, myRank - 1, 0, MPI_COMM_WORLD, &(request[0]));
 		}
+
 		// has right neighbor
-		if(myRank != numProcs - 1) {
-			MPI_Sendrecv(&A[rankLength], 1, MPI_DOUBLE, myRank + 1, 0, &A[rankLength + 1], 1,
-			             MPI_DOUBLE, myRank + 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		if(myRank < numProcs - 1) {
+			MPI_Irecv(&A[rankLength + 1], 1, MPI_DOUBLE, myRank + 1, 0, MPI_COMM_WORLD,
+			          &(request[2]));
 		}
 
 		for(long long i = 0; i < bufferLength; i++) {
 			// center stays constant (the heat is still on)
-			if(i == source_x % rankLength + 1 && myRank == source_x / rankLength) {
+			if(i == source_x) {
 				B[i] = A[i];
 				continue;
 			}
@@ -105,18 +111,36 @@ int main(int argc, char** argv) {
 			B[i] = tc + 0.2 * (tl + tr + (-2 * tc));
 		}
 
+		// show intermediate step
+		if(!(t % 10000) && myRank == 0) {
+			printf("Step t=%d:\t", t);
+			printTemperature(&A[1], rankLength);
+			printf("\n");
+		}
+
+		if(myRank > 0) {
+			if(t > 1) {
+				MPI_Wait(&(request[1]), MPI_STATUS_IGNORE);
+			}
+
+			MPI_Isend(&B[1], 1, MPI_DOUBLE, myRank - 1, 0, MPI_COMM_WORLD, &(request[1]));
+			MPI_Wait(&(request[0]), MPI_STATUS_IGNORE);
+			B[0] = A[0];
+		}
+
+		if(myRank < numProcs - 1) {
+			if(t > 1) {
+				MPI_Wait(&(request[3]), MPI_STATUS_IGNORE);
+			}
+
+			MPI_Isend(&B[rankLength], 1, MPI_DOUBLE, myRank + 1, 0, MPI_COMM_WORLD, &(request[3]));
+			MPI_Wait(&(request[2]), MPI_STATUS_IGNORE);
+			B[rankLength + 1] = A[rankLength + 1];
+		}
 		// swap matrices (just pointers, not content)
 		Vector H = A;
 		A = B;
 		B = H;
-
-		// show intermediate step
-		if(!(t % 10000) && myRank == 0) {
-			printf("Step t=%d:\t", t);
-			printTemperature(A, N);
-			printf("\n");
-		}
-		MPI_Barrier(MPI_COMM_WORLD);
 	}
 
 	releaseVector(B);
