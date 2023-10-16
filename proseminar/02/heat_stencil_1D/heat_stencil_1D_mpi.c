@@ -47,8 +47,6 @@ int main(int argc, char** argv) {
 	int rankLength = N / numProcs;
 	int bufferLength = rankLength + 2;
 	MPI_Request request[4];
-	double starttime, endtime;
-	starttime = MPI_Wtime();
 
 	// create a buffer for storing temperature fields
 	Vector A = createVector(bufferLength);
@@ -67,12 +65,14 @@ int main(int argc, char** argv) {
 		source_x = -1;
 	}
 
-		printf("Initial:\t");
-		printTemperature(&A[1], rankLength);
-		printf("\n");
+	printf("Initial:\t");
+	printTemperature(&A[1], rankLength);
+	printf("\n");
 
 	// ---------- compute ----------
 
+	double starttime, endtime;
+	starttime = MPI_Wtime();
 	// create a second buffer for the computation
 	Vector B = createVector(bufferLength);
 
@@ -82,19 +82,26 @@ int main(int argc, char** argv) {
 
 		// has left neighbor
 		if(myRank > 0) {
-			MPI_Irecv(&A[0], 1, MPI_DOUBLE, myRank - 1, 0, MPI_COMM_WORLD, &(request[0]));
+			MPI_Irecv(&B[0], 1, MPI_DOUBLE, myRank - 1, 0, MPI_COMM_WORLD, &(request[0]));
+
+			MPI_Isend(&A[1], 1, MPI_DOUBLE, myRank - 1, 0, MPI_COMM_WORLD, &(request[1]));
 		}
 
 		// has right neighbor
 		if(myRank < numProcs - 1) {
-			MPI_Irecv(&A[rankLength + 1], 1, MPI_DOUBLE, myRank + 1, 0, MPI_COMM_WORLD,
-			          &(request[2]));
+			MPI_Irecv(&B[rankLength + 1], 1, MPI_DOUBLE, myRank + 1, 0, MPI_COMM_WORLD,
+			         &(request[2]));
+
+			MPI_Isend(&A[rankLength], 1, MPI_DOUBLE, myRank + 1, 0, MPI_COMM_WORLD, &(request[3]));
 		}
 
-		for(long long i = 0; i < bufferLength; i++) {
+		if(source_x != -1) {
+			B[source_x] = A[source_x];
+		}
+
+		for(long long i = 1; i < bufferLength - 1; i++) {
 			// center stays constant (the heat is still on)
 			if(i == source_x) {
-				B[i] = A[i];
 				continue;
 			}
 
@@ -102,38 +109,34 @@ int main(int argc, char** argv) {
 			value_t tc = A[i];
 
 			// get temperatures of adjacent cells
-			value_t tl = (i != 0) ? A[i - 1] : tc;
-			value_t tr = (i != bufferLength - 1) ? A[i + 1] : tc;
+			value_t tl = A[i - 1];
+			value_t tr = A[i + 1];
 
 			// compute new temperature at current position
 			B[i] = tc + 0.2 * (tl + tr + (-2 * tc));
 		}
 
+		if(myRank == 0) {
+			B[1] = A[1] + 0.2 * (A[1] + A[2] + (-2 * A[1]));
+		} else if(myRank == numProcs - 1) {
+			B[bufferLength - 2] =
+			   A[bufferLength - 2] +
+			   0.2 * (A[bufferLength - 3] + A[bufferLength - 2] + (-2 * A[bufferLength - 2]));
+		}
+
 		// show intermediate step
-		if(!(t % 10000)) {
+		if(!(t % 10000) && 0) {
 			printf("Step t=%d:\t", t);
 			printTemperature(&A[1], rankLength);
 			printf("\n");
 		}
 
 		if(myRank > 0) {
-			if(t > 0) {
-				MPI_Wait(&(request[1]), MPI_STATUS_IGNORE);
-			}
-
-			MPI_Isend(&B[1], 1, MPI_DOUBLE, myRank - 1, 0, MPI_COMM_WORLD, &(request[1]));
-			MPI_Wait(&(request[0]), MPI_STATUS_IGNORE);
-			B[0] = A[0];
+			MPI_Waitall(2, &(request[0]), MPI_STATUS_IGNORE);
 		}
 
 		if(myRank < numProcs - 1) {
-			if(t > 0) {
-				MPI_Wait(&(request[3]), MPI_STATUS_IGNORE);
-			}
-
-			MPI_Isend(&B[rankLength], 1, MPI_DOUBLE, myRank + 1, 0, MPI_COMM_WORLD, &(request[3]));
-			MPI_Wait(&(request[2]), MPI_STATUS_IGNORE);
-			B[rankLength + 1] = A[rankLength + 1];
+			MPI_Waitall(2, &(request[2]), MPI_STATUS_IGNORE);
 		}
 		// swap matrices (just pointers, not content)
 		Vector H = A;
