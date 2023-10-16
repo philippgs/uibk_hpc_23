@@ -11,5 +11,5 @@
 # Enforce exclusive node allocation, do not share with other jobs
 #SBATCH --exclusive
 
-module load openmpi/3.1.6-gcc-12.2.0-d2gmn55
-mpiexec ~/heat_stencil_1D_mpi 4096
+module load openmpi/4.1.4-oneapi-2022.2.1-oj6kipv
+mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/a.out 16384
