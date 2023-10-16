@@ -4,13 +4,13 @@ Team collaboration of Hendrik Munske and Florian Neururer
 
 ### Communication Pattern
 
-- Point-to-Point: In this task we used a Point-to-Point communcation pattern where each rank communicates with its left and right neighbor (if they exist). Upon each timestep the outer left and right value of each rank are sent to the relevant neighbor. This does not include the first and last element of the buffer since these are used to store the values of the neighbors(called ghost cells).
+- Point-to-Point: In this task we used a Point-to-Point communication pattern where each rank communicates with its left and right neighbor (if they exist). Upon each time step the outer left and right value of each rank are sent to the relevant neighbor. This does not include the first and last element of the buffer since these are used to store the values of the neighbors (called ghost cells).
 
 We chose this pattern because this would provide less communication because only adjacent ranks need to exchange data, reducing the overall amount of communication. And only the relevant elements are sent which keeps the individual messages small.
 
 ### Additional Changes
 
-- **Data Partitioning**: In the provided code, the 1D grid is partitioned among the available ranks, so each process is responsible for a subrange of the grid. This needs to ensure that each rank has correct boundary values at the start.
+- **Data Partitioning**: In the provided code, the 1D grid is partitioned among the available ranks, so each process is responsible for a subset of the grid. This ensures that each rank has correct boundary values at the start.
 
 - **Synchronization**: The code uses non-blocking communication with `MPI_Irecv` and `MPI_Isend` followed by `MPI_Wait` to ensure synchronization of the boundary values. It's essential to ensure that the received data is used only after it has been successfully received.
 
@@ -42,7 +42,7 @@ We chose this pattern because this would provide less communication because only
 
 ### Scalability
 
-- **Weak Scalability**: The system doesn't scale well when we fix the problem size and increase the number of ranks. This could be due to a rise in communication overhead since we cut the problem into smaller chunks an therefore have to communicate more.
+- **Weak Scalability**: The system doesn't scale well when we fix the problem size and increase the number of ranks. This could be due to a rise in communication overhead since we cut the problem into smaller chunks a therefore have to communicate more.
 
 - **Problem Size Scalability**: The system shows better scalability where we increase the problem size.
 
