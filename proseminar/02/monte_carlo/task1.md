@@ -19,7 +19,7 @@ A straightforward way to parallelize is to divide the number of samples among al
 
 - Collective Communication: We can gather all counts at the master rank using MPI_Reduce an in the reduce call tell MPI to already sum up the values.
 
-In this task we chose to use **Collective Communication** becasue it seems more efficient than point-to-point communication for this problem since none of the synchronisation and final calculation has to be implemented by ourself and instead we can rely on the optimized implementation of MPI.
+In this task we chose to use **Collective Communication** because it seems more efficient than point-to-point communication for this problem since none of the synchronization and final calculation has to be implemented by ourselves, and instead we can rely on the optimized implementation of MPI.
 
 ### Parallel Performance
 
@@ -32,15 +32,15 @@ In this task we chose to use **Collective Communication** becasue it seems more 
 | $10^{12}$ | 79.379   | 3.141594 |
 | $10^{13}$ | 791.921  | 3.141593 |
 
-## Obeservations and Implications
+## Observations and Implications
 
-1. **Speedup**: The most obvious benefit is the achieved speedup. With lower input sizes like for example when executing with $N=10^9$ this actually results in lower overall execution time of the prgram. The numbers in the table represent only the calculation time within the program after all the MPI setup has complete. If we run the same with the command:
+1. **Speedup**: The most obvious benefit is the achieved speedup. With lower input sizes like for example when executing with $N=10^9$ this actually results in lower overall execution time of the program. The numbers in the table represent only the calculation time within the program after all the MPI setup has complete. If we run the same with the command:
 
    `time pi_seq 100000000` = 0.279s\
    `time mpiexec pi_mpi 100000000` = 0.823s
 
-   Here we can see that just parallelizing a program can add some overhead if the calculations are not the expensive. Thus especially for lower problem sizes parallelizing can reduce performance.
+   Here we can see that just parallelizing a program can add some overhead if the calculations are not the expensive. Thus, especially for lower problem sizes parallelizing can reduce performance.
 
 2. **Non-Linear Speedup**: Due to several overheads we can't see a linear speedup with the number of processors.
-   In the chart below we can see the speedup. As we increase the problem size the relative overhead gets smaller and we can observe better scaling but it is still not close to 64.
+   In the chart below we can see the speedup. As we increase the problem size the relative overhead gets smaller, and we can observe better scaling, but it is still not close to 64.
    ![Speedup](./charts/speedup.png)

@@ -32,6 +32,10 @@ int main(int argc, char** argv) {
 	MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
 	MPI_Comm_size(MPI_COMM_WORLD, &numProcs);
 
+	if(myRank == 0) {
+		printf("Setup: number of Processes = %d\n", numProcs);
+	}
+
 	// Ensure that work is evenly distributed
 	// allows integer divisions
 	// could be easily fixed
@@ -50,6 +54,8 @@ int main(int argc, char** argv) {
 
 	// create a buffer for storing temperature fields
 	Vector A = createVector(bufferLength);
+	// create a second buffer for the computation
+	Vector B = createVector(bufferLength);
 
 	// set up initial conditions in A
 	for(int i = 0; i < bufferLength; i++) {
@@ -73,8 +79,6 @@ int main(int argc, char** argv) {
 
 	double starttime, endtime;
 	starttime = MPI_Wtime();
-	// create a second buffer for the computation
-	Vector B = createVector(bufferLength);
 
 	// for each time step ..
 	for(int t = 0; t < T; t++) {
@@ -90,13 +94,19 @@ int main(int argc, char** argv) {
 		// has right neighbor
 		if(myRank < numProcs - 1) {
 			MPI_Irecv(&B[rankLength + 1], 1, MPI_DOUBLE, myRank + 1, 0, MPI_COMM_WORLD,
-			         &(request[2]));
+			          &(request[2]));
 
 			MPI_Isend(&A[rankLength], 1, MPI_DOUBLE, myRank + 1, 0, MPI_COMM_WORLD, &(request[3]));
 		}
 
 		if(source_x != -1) {
 			B[source_x] = A[source_x];
+		}
+
+		if(myRank == 0) {
+			A[0] = A[1];
+		} else if(myRank == numProcs - 1) {
+			A[bufferLength - 1] = A[bufferLength - 2];
 		}
 
 		for(long long i = 1; i < bufferLength - 1; i++) {
@@ -114,14 +124,6 @@ int main(int argc, char** argv) {
 
 			// compute new temperature at current position
 			B[i] = tc + 0.2 * (tl + tr + (-2 * tc));
-		}
-
-		if(myRank == 0) {
-			B[1] = A[1] + 0.2 * (A[1] + A[2] + (-2 * A[1]));
-		} else if(myRank == numProcs - 1) {
-			B[bufferLength - 2] =
-			   A[bufferLength - 2] +
-			   0.2 * (A[bufferLength - 3] + A[bufferLength - 2] + (-2 * A[bufferLength - 2]));
 		}
 
 		// show intermediate step
