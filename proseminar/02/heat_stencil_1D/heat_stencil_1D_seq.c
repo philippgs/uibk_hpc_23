@@ -28,10 +28,10 @@ int main(int argc, char** argv) {
 	printf("Computing heat-distribution for room size N=%d for T=%d timesteps\n", N, T);
 
 	// ---------- setup ----------
-	clock_t start, end;
-	start = clock();
 	// create a buffer for storing temperature fields
 	Vector A = createVector(N);
+	// create a second buffer for the computation
+	Vector B = createVector(N);
 
 	// set up initial conditions in A
 	for(int i = 0; i < N; i++) {
@@ -48,8 +48,8 @@ int main(int argc, char** argv) {
 
 	// ---------- compute ----------
 
-	// create a second buffer for the computation
-	Vector B = createVector(N);
+	clock_t start, end;
+	start = clock();
 
 	// for each time step ..
 	for(int t = 0; t < T; t++) {

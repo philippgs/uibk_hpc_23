@@ -50,6 +50,8 @@ int main(int argc, char** argv) {
 
 	// create a buffer for storing temperature fields
 	Vector A = createVector(bufferLength);
+	// create a second buffer for the computation
+	Vector B = createVector(bufferLength);
 
 	// set up initial conditions in A
 	for(int i = 0; i < bufferLength; i++) {
@@ -73,8 +75,6 @@ int main(int argc, char** argv) {
 
 	double starttime, endtime;
 	starttime = MPI_Wtime();
-	// create a second buffer for the computation
-	Vector B = createVector(bufferLength);
 
 	// for each time step ..
 	for(int t = 0; t < T; t++) {
