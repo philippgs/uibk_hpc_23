@@ -14,10 +14,8 @@ typedef Vector* Vector2D;
 Vector createVector(int N);
 Vector2D createVectorSpace(int m, int n);
 
-void releaseVector(Vector m);
 void releaseVectorSpace(Vector2D X, int m);
 
-void printTemperature(Vector m, int N);
 void printTemperatureSpace(Vector2D X, int m, int n);
 
 // -- simulation code ---
@@ -142,52 +140,11 @@ Vector2D createVectorSpace(int m, int n) {
 	return vectorSpace;
 }
 
-void releaseVector(Vector m) {
-	free(m);
-}
-
 void releaseVectorSpace(Vector2D X, int m) {
 	for(int i = 0; i < m; i++) {
 		free(X[i]);
 	}
 	free(X);
-}
-
-void printTemperature(Vector m, int N) {
-	const char* colors = " .-:=+*^X#%@";
-	const int numColors = 12;
-
-	// boundaries for temperature (for simplicity hard-coded)
-	const value_t max = 273 + 30;
-	const value_t min = 273 + 0;
-
-	// set the 'render' resolution
-	int W = RESOLUTION;
-
-	// step size in each dimension
-	int sW = N / W;
-
-	// room
-	// left wall
-	printf("X");
-	// actual room
-	for(int i = 0; i < W; i++) {
-		// get max temperature in this tile
-		value_t max_t = 0;
-		for(int x = sW * i; x < sW * i + sW; x++) {
-			max_t = (max_t < m[x]) ? m[x] : max_t;
-		}
-		value_t temp = max_t;
-
-		// pick the 'color'
-		int c = ((temp - min) / (max - min)) * numColors;
-		c = (c >= numColors) ? numColors - 1 : ((c < 0) ? 0 : c);
-
-		// print the average temperature
-		printf("%c", colors[c]);
-	}
-	// right wall
-	printf("X");
 }
 
 void printTemperatureSpace(Vector2D X, int m, int n) {
