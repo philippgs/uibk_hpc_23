@@ -1,0 +1,2 @@
+CompileFlags:
+  Add: [-ferror-limit=100, -I/usr/local/Cellar/open-mpi/4.1.6/include ,-L/usr/local/Cellar/open-mpi/4.1.6/lib ,-L/usr/local/opt/hwloc/lib ,-L/usr/local/opt/libevent/lib ,-lmpi]
