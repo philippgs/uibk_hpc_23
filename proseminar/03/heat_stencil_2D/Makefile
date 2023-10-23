@@ -1,39 +1,39 @@
 CC=gcc
 MPICC=mpicc
 CC_FLAGS=-O3 -std=gnu11 -Wall -Wextra -pedantic -lm
+BUILD=build/
+
+pre:
+	mkdir build
 
 .PHONY: all
-all: heat_stencil_2D_seq heat_stencil_2D_mpi heat_stencil_2D_mpi_block heat_stencil_1D_mpi heat_stencil_1D_mpi_block
+all: pre heat_stencil_2D_seq heat_stencil_2D_mpi heat_stencil_2D_mpi_block heat_stencil_1D_mpi heat_stencil_1D_mpi_block
 
 
 heat_stencil_2D_seq: heat_stencil_2D_seq.c
-	@$(CC) $(CC_FLAGS) $< -o heat_stencil_2D_seq
+	@$(CC) $(CC_FLAGS) $< -o $(BUILD)heat_stencil_2D_seq
 
 heat_stencil_2D_mpi: heat_stencil_2D_mpi.c
-	@$(MPICC) $(CC_FLAGS) $< -o heat_stencil_2D_mpi
+	@$(MPICC) $(CC_FLAGS) $< -o $(BUILD)heat_stencil_2D_mpi
 
 heat_stencil_2D_mpi_block: heat_stencil_2D_mpi_block.c
-	@$(MPICC) $(CC_FLAGS) $< -o heat_stencil_2D_mpi_block
+	@$(MPICC) $(CC_FLAGS) $< -o $(BUILD)heat_stencil_2D_mpi_block
 
 heat_stencil_1D_mpi_block: heat_stencil_1D_mpi_block.c
-	@$(MPICC) $(CC_FLAGS) $< -o heat_stencil_1D_mpi_block
+	@$(MPICC) $(CC_FLAGS) $< -o $(BUILD)heat_stencil_1D_mpi_block
 
 heat_stencil_1D_mpi: heat_stencil_1D_mpi.c
-	@$(MPICC) $(CC_FLAGS) $< -o heat_stencil_1D_mpi
+	@$(MPICC) $(CC_FLAGS) $< -o $(BUILD)heat_stencil_1D_mpi
 
 .PHONY: clean
 clean:
-	@rm heat_stencil_2D_seq
-	@rm heat_stencil_2D_mpi
-	@rm heat_stencil_2D_mpi_block
-	@rm heat_stencil_1D_mpi
-	@rm heat_stencil_1D_mpi_block
+	rm -r $(BUILD)
 
 .PHONY: run
 run: all
 	@echo "Sequential:"
-	@./heat_stencil_2D_seq
+	@./$(BUILD)heat_stencil_2D_seq
 	@echo
 	@echo "Parallel:"
-	@mpiexec ./heat_stencil_2D_mpi
+	@mpiexec ./$(BUILD)heat_stencil_2D_mpi
 	@echo

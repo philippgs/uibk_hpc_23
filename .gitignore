@@ -3,3 +3,4 @@
 *.docx
 notes.md
 .ltex/
+**build/
