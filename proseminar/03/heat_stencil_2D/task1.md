@@ -12,7 +12,7 @@ Team collaboration of Hendrik Munske and Florian Neururer
 ![Performance](./charts/perf.png)
 ![Time](./charts/time.png)
 ![Speedup](./charts/speedup.png)
-![Efficiency](./charts/eff.png.png)
+![Efficiency](./charts/eff.png)
 
 ### Weak Scalability
 
