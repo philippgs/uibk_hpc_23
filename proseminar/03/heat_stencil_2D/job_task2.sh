@@ -5,6 +5,8 @@
 # Name your job to be able to identify it later
 #SBATCH --job-name heat-seq 
 # Redirect output stream to this file
+# Maximum number of tasks (=processes) to start in total
+#SBATCH --ntasks=96
 #SBATCH --output=output.log
 # Maximum number of tasks (=processes) to start in total
 #SBATCH --exclusive
