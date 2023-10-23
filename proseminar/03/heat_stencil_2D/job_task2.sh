@@ -15,66 +15,66 @@ make all
 
 echo "12 Core - 1024"
 
-mpirun -np 12 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi 1024
-mpirun -np 12 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi_block 1024
-mpirun -np 12 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi 1024
-mpirun -np 12 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi_block 1024
+mpirun -np 12 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi 1024
+mpirun -np 12 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi_block 1024
+mpirun -np 12 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi 1024
+mpirun -np 12 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi_block 1024
 
 
 echo "12 Core - 2048"
 
-mpirun -np 12 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi 2048
-mpirun -np 12 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi_block 2048
-mpirun -np 12 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi 2048
-mpirun -np 12 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi_block 2048
+mpirun -np 12 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi 2048
+mpirun -np 12 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi_block 2048
+mpirun -np 12 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi 2048
+mpirun -np 12 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi_block 2048
 
 echo "12 Core - 4096"
 
-mpirun -np 12 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi 4096
-mpirun -np 12 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi_block 4096
-mpirun -np 12 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi 4096
-mpirun -np 12 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi_block 4096
+mpirun -np 12 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi 4096
+mpirun -np 12 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi_block 4096
+mpirun -np 12 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi 4096
+mpirun -np 12 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi_block 4096
 
 echo "36 Core - 1024"
 
-mpirun -np 36 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi 1024
-mpirun -np 36 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi_block 1024
-mpirun -np 36 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi 1024
-mpirun -np 36 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi_block 1024
+mpirun -np 36 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi 1024
+mpirun -np 36 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi_block 1024
+mpirun -np 36 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi 1024
+mpirun -np 36 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi_block 1024
 
 
 echo "36 Core - 2048"
 
-mpirun -np 36 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi 2048
-mpirun -np 36 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi_block 2048
-mpirun -np 36 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi 2048
-mpirun -np 36 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi_block 2048
+mpirun -np 36 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi 2048
+mpirun -np 36 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi_block 2048
+mpirun -np 36 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi 2048
+mpirun -np 36 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi_block 2048
 
 echo "36 Core - 4096"
 
-mpirun -np 36 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi 4096
-mpirun -np 36 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi_block 4096
-mpirun -np 36 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi 4096
-mpirun -np 36 --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi_block 4096
+mpirun -np 36 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi 4096
+mpirun -np 36 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi_block 4096
+mpirun -np 36 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi 4096
+mpirun -np 36 --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi_block 4096
 
 echo "96 Core - 1024"
 
-mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi 1024
-mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi_block 1024
-mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi 1024
-mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi_block 1024
+mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi 1024
+mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi_block 1024
+mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi 1024
+mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi_block 1024
 
 
 echo "96 Core - 2048"
 
-mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi 2048
-mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi_block 2048
-mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi 2048
-mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi_block 2048
+mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi 2048
+mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi_block 2048
+mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi 2048
+mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi_block 2048
 
 echo "96 Core - 4096"
 
-mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi 4096
-mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/build/heat_stencil_1D_mpi_block 4096
-mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi 4096
-mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/build/heat_stencil_2D_mpi_block 4096
+mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi 4096
+mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_1D_mpi_block 4096
+mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi 4096
+mpirun -np $SLURM_NTASKS --mca btl_openib_allow_ib 1 ~/uibk_hpc_23/proseminar/03/build/heat_stencil_2D_mpi_block 4096
