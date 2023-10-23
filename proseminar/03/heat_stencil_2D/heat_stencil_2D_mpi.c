@@ -8,7 +8,7 @@ typedef double value_t;
 
 #define RESOLUTION 120
 
-#define INDEX(i, j) ((i) + ((j) * bufferLengthX))
+#define INDEX(i, j) ((i) + ((j)*bufferLengthX))
 
 // -- vector utilities --
 
@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
 	// ---------- setup ----------
 	// assumed square problem space
 	int ranksX, ranksY;
-  factor(numProcs, &ranksX, &ranksY);
+	factor(numProcs, &ranksX, &ranksY);
 	int rankLengthX = N / ranksX;
 	int rankLengthY = N / ranksY;
 	int bufferLengthX = rankLengthX + 2;
@@ -115,7 +115,6 @@ int main(int argc, char** argv) {
 	// for each time step ..
 	for(int t = 0; t < T; t++) {
 
-		MPI_Barrier(MPI_COMM_WORLD);
 		MPI_Isend(&A[INDEX(1, 1)] /* north */, 1, topBottom, top, 0, MPI_COMM_WORLD, &(reqs[0]));
 		MPI_Isend(&A[INDEX(1, rankLengthY)] /* south */, 1, topBottom, bottom, 0, MPI_COMM_WORLD,
 		          &(reqs[1]));
