@@ -27,6 +27,7 @@ for that assignment have to be handed in via OLAT by 17:00 on Monday.
 | 2023-10-10 | [1](01)    | SLURM Job Submission, basic cluster setup and measurements  |
 | 2023-10-17 | [2](02)    | Basic parallelization with MPI                              |
 | 2023-10-24 | [3](03)    | 2D heat stenicl & non-blocking communication                |
+| 2023-10-31 | [4](04)    | Performance profiling and analysis                          |
 
 ## Handing in and Presenting Solutions
 
