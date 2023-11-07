@@ -29,6 +29,7 @@ for that assignment have to be handed in via OLAT by 17:00 on Monday.
 | 2023-10-24 | [3](03)    | 2D heat stenicl & non-blocking communication                |
 | 2023-10-31 | [4](04)    | Performance profiling and analysis                          |
 | 2023-11-07 | [5](05)    | Functional debugging                                        |
+| 2023-11-07 | [6](06)    | N-body                                                      |
 
 ## Handing in and Presenting Solutions
 
