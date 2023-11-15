@@ -22,3 +22,4 @@ It will be updated continuously throughout the semester.
 | [03](03_measurements.pdf)                | 2023-10-18 | Measuring and Reporting Performance                 |
 | [04](04_debugging.pdf)                   | 2023-10-25 | Debugging Parallel Programs                         |
 | [05](05_mpi_advanced.pdf)                | 2023-11-08 | MPI Derived Datatypes and Virtual Topologies        |
+| [06](06_dwarfs.pdf)                      | 2023-11-15 | The 13 Dwarfs of HPC                                |
