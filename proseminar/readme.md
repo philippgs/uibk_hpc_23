@@ -31,6 +31,7 @@ for that assignment have to be handed in via OLAT by 17:00 on Monday.
 | 2023-11-07 | [5](05)    | Functional debugging                                        |
 | 2023-11-14 | [6](06)    | N-body                                                      |
 | 2023-11-21 | [7](07)    | N-body: Parallelization & load imbalance                    |
+| 2023-11-28 | [8](08)    | N-body: One-sided communication                             |
 
 ## Handing in and Presenting Solutions
 
