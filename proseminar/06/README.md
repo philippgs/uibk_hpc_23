@@ -1,4 +1,4 @@
-# Assignment 06
+# Assignment 6
 
 The goal of this assignment is to implement a 3D n-body simulation.
 
