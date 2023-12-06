@@ -25,3 +25,4 @@ It will be updated continuously throughout the semester.
 | [06](06_dwarfs.pdf)                      | 2023-11-15 | The 13 Dwarfs of HPC                                |
 | [07](07_mpi_advanced_2.pdf)              | 2023-11-22 | Groups, Communicators and One-Sided Communication   |
 | [08](08_energy.pdf)                      | 2023-11-29 | Energy in HPC                                       |
+| [09](09_domain_decomposition.pdf)        | 2023-12-06 | Domain Decomposition and Load Balancing             |
