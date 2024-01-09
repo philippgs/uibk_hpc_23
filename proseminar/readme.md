@@ -35,6 +35,7 @@ for that assignment have to be handed in via OLAT by 17:00 on Monday.
 | 2023-12-05 | [9](09)    | Energy & Power                                              |
 | 2023-12-12 | [10](10)   | Mandelbrot: Parallelization & load imbalance                |
 | 2024-01-09 | [11](11)   | Basic parallelization with Chapel                           |
+| 2024-01-16 | [12](12)   | Parallel I/O                                                |
 
 ## Handing in and Presenting Solutions
 
