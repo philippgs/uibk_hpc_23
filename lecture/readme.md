@@ -27,3 +27,4 @@ It will be updated continuously throughout the semester.
 | [08](08_energy.pdf)                      | 2023-11-29 | Energy in HPC                                       |
 | [09](09_domain_decomposition.pdf)        | 2023-12-06 | Domain Decomposition and Load Balancing             |
 | [10](10_programming_models.pdf)          | 2023-12-13 | Additional Programming Models                       |
+| [11](11_parallel_io.pdf)                 | 2024-01-10 | Parallel I/O                                        |
