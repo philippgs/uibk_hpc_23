@@ -37,9 +37,9 @@ int main(int argc, char **argv) {
 
 	Domain domain_b = Domain(size_domain, 273.0);
 
-    std::chrono::time_point<std::chrono::system_clock> time_start, time_end;
+	std::chrono::time_point<std::chrono::system_clock> time_start, time_end;
 
-    time_start = std::chrono::system_clock::now();
+	time_start = std::chrono::system_clock::now();
 
 	for (std::size_t t = 0; t < timesteps; t++) {
 
@@ -59,21 +59,21 @@ int main(int argc, char **argv) {
 		std::swap(domain_a, domain_b);
 
 		if ((t % 10000) == 0) {
-            std::cout << "Step t=" << t << "\t";
-            printTemperature(domain_a);
-            std::cout << std::endl;
+			std::cout << "Step t=" << t << "\t";
+			printTemperature(domain_a);
+			std::cout << std::endl;
 		}
 	}
 
-    time_end = std::chrono::system_clock::now();
-    const std::chrono::duration<double> elapsed_seconds = time_end - time_start;
+	time_end = std::chrono::system_clock::now();
+	const std::chrono::duration<double> elapsed_seconds = time_end - time_start;
 
 	std::cout << "\t\t";
 	printTemperature(domain_a);
 	std::cout << std::endl;
 	int verification_result = EXIT_SUCCESS;
-    verification_result = verifyTemperature(domain_a);
-    std::cout << "Computation took " << elapsed_seconds.count() << " seconds" << std::endl;
+	verification_result = verifyTemperature(domain_a);
+	std::cout << "Computation took " << elapsed_seconds.count() << " seconds" << std::endl;
 
 	return verification_result;
 }
