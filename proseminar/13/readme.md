@@ -12,6 +12,7 @@ This exercise consists in porting the main computation of the heat stencil appli
 - Make sure you can compile the sequential and a future SYCL version of the source code. A minimal CMake build infrastructure is provided and can be used as follows
 
 ```bash
+module purge && module load llvm/15.0.4-python-3.10.8-gcc-8.5.0-bq44zh7
 mkdir build && cd build
 cmake .. -DCMAKE_PREFIX_PATH="/scratch/c703429/software/adaptivecpp/lib/cmake/AdaptiveCpp/"
 make -j2
