@@ -29,3 +29,4 @@ It will be updated continuously throughout the semester.
 | [10](10_programming_models.pdf)          | 2023-12-13 | Additional Programming Models                       |
 | [11](11_parallel_io.pdf)                 | 2024-01-10 | Parallel I/O                                        |
 | [12](12_accelerators.pdf)                | 2024-01-17 | Accelerator Computing                               |
+| [13](13_node-level_performance.pdf)      | 2024-01-24 | Node-level performance                              |
